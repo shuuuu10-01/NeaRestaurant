@@ -11,6 +11,12 @@ export const getters = {
   }
 };
 
+export const mutations = {
+  setPosition(state, data) {
+    state.position = data;
+  }
+};
+
 export const actions = {
   async fetchPosition () {
     if (!navigator.geolocation) { 
@@ -20,7 +26,7 @@ export const actions = {
 
     //Geolocation APIを利用できる環境向けの処理
     await new Promise((resolve, reject) => {
-      const position = navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.getCurrentPosition(
         success => {
           successCallback(success)
           resolve()
@@ -39,11 +45,6 @@ export const actions = {
   }
 };
 
-export const mutations = {
-  setPosition(state, data) {
-    state.position = data
-  }
-}
 
 function successCallback(position) {
   const data = {
@@ -55,6 +56,6 @@ function successCallback(position) {
 }
 
 function errorCallback(position) {
-  alert("位置情報が取得できませんでした。"+ '\n'+ position.message)
+  alert("位置情報が取得できませんでした。\n"+ String(position.message))
   console.info(position)
 }
