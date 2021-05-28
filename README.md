@@ -1,20 +1,10 @@
-# nearestaurant
+# NeaRestaurant
 
-## Build Setup
-
-```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+### 課題
+リクルート WEB サービスのホットペッパー グルメサーチ API を使用して、現在地付近のレスト ラン情報を検索するウェブアプリを作成
+`https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+`
+## 使用技術
+* Javascript 
+* Nuxt ver 2.15.3
+* Vuetify ver 1.11.3
