@@ -11,11 +11,10 @@ export const getters = {
 };
 
 export const actions = {
-  async fetchAPI({ commit }) {
+  async fetchAPI({ commit }, position) {
     // ここにAPI通信をして検索結果を取得
-    const data = await searchByPosition(35.66922, 139.761457, 1000);
-    if (!data) { 
-      alert('店舗情報が取得できませんでした。')
+    const data = await searchByPosition(position.latitude, position.longitude, 4);
+    if (!data) {
       return false
     }
     commit('setList', data)
@@ -29,20 +28,25 @@ export const mutations = {
   }
 };
 
-async function searchByPosition(lat, lng, range) {
+async function searchByPosition(latitude, longitude, range) {
   return new Promise((resolve, reject) => {
     axios.get(process.env.BASE_URL + "gourmet/v1/", {
       params: {
         key: process.env.API_KEY,
-        lat: lat,
-        lng: lng,
+        lat: latitude,
+        lng: longitude,
         range: range,
         format: "json"
       }
     })
     .then(response => {
-      console.info(response.data.results.shop, "func")
-      resolve(response.data.results.shop)
+      console.info(response)
+      if (response.data.results.shop) {
+        resolve(response.data.results.shop);
+      } else {
+        alert("店舗が見つかりませんでした。\n" + response.data.results.error[0].message)
+        resolve();
+      }
     })
     .catch(error => {
       console.info(error);
