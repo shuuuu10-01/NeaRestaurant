@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 require("dotenv").config();
-const { API_KEY } = process.env;
+const { API_KEY, BASE_URL } = process.env;
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -38,6 +38,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/proxy'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -64,6 +65,19 @@ export default {
   },
 
   env: {
-    API_KEY
+    API_KEY,
+    BASE_URL
+  },
+
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: 'http://webservice.recruit.co.jp/hotpepper',
+      pathRewrite: { 
+        '^/api': ''
+      }
+    }
   }
 }
