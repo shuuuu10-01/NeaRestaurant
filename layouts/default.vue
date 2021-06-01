@@ -10,7 +10,11 @@
 .main {
   max-width: 1000px;
   text-align: center;
-  margin: auto;
   font-family: 'Noto Sans JP', sans-serif;
+  height: 100%;
+}
+
+.v-application ul, .v-application ol {
+  padding-left: 0px;
 }
 </style>
