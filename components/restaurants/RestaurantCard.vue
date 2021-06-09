@@ -4,6 +4,7 @@
     hover
     rounded
   >
+    <v-img height="430px" :src="item.photo.pc.l" />
     <v-btn
       icon
       class="icon"
@@ -21,24 +22,26 @@
     >
       <v-icon large>mdi-star</v-icon>
     </v-btn>
-    <v-img height="450px" :src="item.photo.pc.l" />
     <h2 class="text">{{ item.name }}</h2>
     <p v-if="item.catch" class="text">{{ item.catch }}</p>
     <div class="under">
-      <p><v-icon>mdi-map-marker</v-icon>{{ item.mobile_access }}</p>
+      <icon-text icon="mdi-walk" :text="item.mobile_access" />
+      <icon-text icon="mdi-map-marker" :text="get_distance()" />
       <v-btn
         outlined
         class="next"
         @click="$router.push('restaurant/' + item.id)"
       >
-        詳しくはこちら<v-icon>mdi-arrow-right</v-icon>
+        詳しくは<v-icon>mdi-arrow-right</v-icon>
       </v-btn>
     </div>
   </v-card>
 </template>
 
 <script>
+import IconText from './IconText.vue'
 export default {
+  components: { IconText },
   data () {
     return {
       nowFavo: false
@@ -49,6 +52,11 @@ export default {
   },
   async created () {
     this.nowFavo = this.favo()
+  },
+  computed: {
+    getPosition() {
+      return this.$store.getters['geolocation/position']
+    }
   },
   methods: {
     favo () {
@@ -81,6 +89,19 @@ export default {
       }
       window.localStorage.setItem("favolist", JSON.stringify(list));
       this.nowFavo = this.favo()
+    },
+    get_distance() {
+      const R = Math.PI / 180;
+      const positions = {
+        lat1: this.getPosition.latitude * R,
+        lng1: this.getPosition.longitude * R,
+        lat2: this.item.lat * R,
+        lng2: this.item.lng * R
+      }
+      const distance = 
+        String(Math.round(10 * 6371 * Math.acos(Math.cos(positions.lat1) * Math.cos(positions.lat2) * Math.cos(positions.lng2 - positions.lng1) + Math.sin(positions.lat1) * Math.sin(positions.lat2)))/10)
+      
+      return　"およそ " + distance + "km 先";
     }
   }
 }
@@ -110,6 +131,7 @@ p {
   color: gray;
   padding-left: 16px;
   padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 .under .next{
   position: absolute;
