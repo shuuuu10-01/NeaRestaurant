@@ -5,26 +5,9 @@
     rounded
   >
     <v-img height="430px" :src="item.photo.pc.l" />
-    <v-btn
-      icon
-      class="icon"
-      v-if="!nowFavo"
-      @click="setStorage(true)"
-    >
-      <v-icon large>mdi-star</v-icon>
-    </v-btn>
-    <v-btn 
-      icon
-      class="icon"
-      v-if="nowFavo"
-      color="#FBC02D"
-      @click="setStorage(false)"
-    >
-      <v-icon large>mdi-star</v-icon>
-    </v-btn>
-    <h2 class="text">{{ item.name }}</h2>
-    <p v-if="item.catch" class="text">{{ item.catch }}</p>
     <div class="under">
+      <h2 class="text">{{ item.name }}</h2>
+      <p v-if="item.catch" class="text">{{ item.catch }}</p>
       <icon-text icon="mdi-walk" :text="item.mobile_access" />
       <icon-text icon="mdi-map-marker" :text="get_distance()" />
       <v-btn
@@ -33,6 +16,23 @@
         @click="$router.push('restaurant/' + item.id)"
       >
         詳しくは<v-icon>mdi-arrow-right</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        class="icon"
+        v-if="!nowFavo"
+        @click="setStorage(true)"
+      >
+        <v-icon large>mdi-star</v-icon>
+      </v-btn>
+      <v-btn 
+        icon
+        class="icon"
+        v-if="nowFavo"
+        color="#FBC02D"
+        @click="setStorage(false)"
+      >
+        <v-icon large>mdi-star</v-icon>
       </v-btn>
     </div>
   </v-card>
@@ -130,8 +130,9 @@ p {
   font-size: 14px;
   color: gray;
   padding-left: 16px;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+}
+.under {
+  position: relative;
 }
 .under .next{
   position: absolute;

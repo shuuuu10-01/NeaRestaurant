@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn icon class="icon">
+    <v-btn icon class="top-icon">
       <v-icon
         large
         @click="$router.push('/')"
@@ -15,6 +15,7 @@
         <icon-text icon="mdi-map-marker" :text="data.address + get_distance()"/>
         <icon-text icon="mdi-walk" :text="data.mobile_access"/>
         <icon-text icon="mdi-calendar-range" :text="data.open"/>
+        <icon-text icon="mdi-web" :text="data.urls.pc" url="true"/>
         <v-btn
           icon
           class="icon"
@@ -87,7 +88,6 @@ export default {
           }
         })
         .then(response => {
-          console.info(response)
           if (response.data.results.shop) {
             resolve(response.data.results.shop);
           } else {
@@ -109,7 +109,6 @@ export default {
         lat2: this.data.lat * R,
         lng2: this.data.lng * R
       }
-      console.log(positions)
       const distance = 
         String(Math.round(10 * 6371 * Math.acos(Math.cos(positions.lat1) * Math.cos(positions.lat2) * Math.cos(positions.lng2 - positions.lng1) + Math.sin(positions.lat1) * Math.sin(positions.lat2)))/10)
       
@@ -164,11 +163,11 @@ h2 {
   padding: 16px;
   font-weight: 570;
 }
-p {
-  font-size: 14px;
-  color: gray;
-  padding-left: 16px;
-  margin-bottom: 8px
+.top-icon {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  z-index: 10;
 }
 .icon {
   position: absolute;
