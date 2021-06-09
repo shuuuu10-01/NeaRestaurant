@@ -62,7 +62,7 @@ export default {
   height: 100%;
 }
 .icon {
-  position: fixed;
+  position: absolute;
   top: 7px;
   left: 7px;
   z-index: 10;

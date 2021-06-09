@@ -1,5 +1,5 @@
 <template>
-  <hooper v-bind="options" style="height: 90%; margin: auto;">
+  <hooper v-bind="options" style="height: 100%; margin: auto;">
     <slide 
       v-for="item in getList"
       :key="item.num"
