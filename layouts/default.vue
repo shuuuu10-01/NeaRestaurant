@@ -1,8 +1,21 @@
 <template>
   <v-app>
+    <Header />
     <nuxt class="main"/>
+    <Footer />
   </v-app>
 </template>
+
+<script>
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+export default {
+  components: {
+    Header,
+    Footer
+  }
+}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP');
