@@ -1,12 +1,13 @@
 <template>
   <div>
-    <v-icon
-      class="icon"
-      large
-      @click="drawer= !drawer"
-    >
-      mdi-magnify
-    </v-icon>
+    <v-btn icon class="icon">
+      <v-icon
+        large
+        @click="drawer= !drawer"
+      >
+        mdi-magnify
+      </v-icon>
+    </v-btn>
     <div class="menu">
       <v-navigation-drawer
         v-model="drawer"
