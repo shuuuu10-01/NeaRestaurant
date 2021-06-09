@@ -4,15 +4,36 @@
     hover
     rounded
   >
-    <v-btn icon class="icon" v-if="!nowFavo" @click="setStorage(true)">
+    <v-btn
+      icon
+      class="icon"
+      v-if="!nowFavo"
+      @click="setStorage(true)"
+    >
       <v-icon large>mdi-star</v-icon>
     </v-btn>
-    <v-btn icon class="icon" v-if="nowFavo" color="#FBC02D" @click="setStorage(false)">
+    <v-btn 
+      icon
+      class="icon"
+      v-if="nowFavo"
+      color="#FBC02D"
+      @click="setStorage(false)"
+    >
       <v-icon large>mdi-star</v-icon>
     </v-btn>
-    <v-img height="500px" :src="item.photo.pc.l" />
+    <v-img height="450px" :src="item.photo.pc.l" />
     <h2 class="text">{{ item.name }}</h2>
     <p v-if="item.catch" class="text">{{ item.catch }}</p>
+    <div class="under">
+      <p><v-icon>mdi-map-marker</v-icon>{{ item.mobile_access }}</p>
+      <v-btn
+        outlined
+        class="next"
+        @click="$router.push('restaurant/' + item.id)"
+      >
+        詳しくはこちら<v-icon>mdi-arrow-right</v-icon>
+      </v-btn>
+    </div>
   </v-card>
 </template>
 
@@ -88,6 +109,11 @@ p {
   font-size: 14px;
   color: gray;
   padding-left: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
+}
+.under .next{
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
 }
 </style>

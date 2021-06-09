@@ -7,6 +7,15 @@ export const state = () => ({
 export const getters = {
   list: state => {
     return state.list;
+  },
+  one: state => (id) => {
+    const check = state.list.filter((item) => {
+      return (item.id === id)
+    })
+    if (check.length === 0) {
+      return false
+    }
+    return check
   }
 };
 
