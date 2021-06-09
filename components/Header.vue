@@ -1,6 +1,6 @@
 <template>
   <header>
-    NeaRestaurant
+    <v-icon dense>mdi-silverware-fork-knife</v-icon> NeaRestaurant <v-icon dense>mdi-silverware-fork-knife</v-icon>
   </header>
 </template>
 
