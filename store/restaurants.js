@@ -10,7 +10,8 @@ export const state = () => ({
     'G008',
     'G013',
   ],
-  range: 4
+  range: 4,
+  favo: false,
 });
 
 export const getters = {
@@ -25,6 +26,9 @@ export const getters = {
       return false
     }
     return check
+  },
+  favo: state => {
+    return state.favo
   }
 };
 
@@ -48,6 +52,9 @@ export const actions = {
   },
   changeRange({ commit }, range) {
     commit('setRange', range)
+  },
+  changeFavo({ commit }, favo) {
+    commit('setFavo', favo)
   }
 }
 
@@ -63,6 +70,13 @@ export const mutations = {
   },
   setRange(state, range) {
     state.range = range
+  },
+  setFavo(state, favo) {
+    state.favo = favo
+    if (favo) {
+      state.list = JSON.parse(localStorage.getItem('favolist'))
+      console.log(state.list)
+    }
   }
 };
 

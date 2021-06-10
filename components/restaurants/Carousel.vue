@@ -49,11 +49,14 @@ export default {
     },
     position () {
       return this.$store.getters['geolocation/position']
+    },
+    getFavo() {
+      return this.$store.getters['restaurants/favo']
     }
   },
   methods: {
     async updateCarousel(payload) {
-      if (this.scroll_end || this.getList === [] || this.getList.length - 1 !== payload.currentSlide) {
+      if (this.scroll_end || this.getList === [] || this.getList.length - 1 !== payload.currentSlide || this.getFavo) {
         return false
       }
 

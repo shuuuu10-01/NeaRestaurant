@@ -36,6 +36,7 @@
           hide-details
           class="mx-3"
           @click="setAll"
+          :disabled="favo"
         ></v-checkbox>
         <div class="genre">
           <v-checkbox
@@ -46,6 +47,7 @@
             value="G001"
             hide-details
             class="mx-3"
+            :disabled="favo"
           ></v-checkbox>
           <v-checkbox
             v-model="genre"
@@ -55,6 +57,7 @@
             hide-details
             class="mx-3"
             append-icon="mdi-food-variant"
+            :disabled="favo"
           ></v-checkbox>
           <v-checkbox
             v-model="genre"
@@ -64,6 +67,7 @@
             hide-details
             class="mx-3"
             append-icon="mdi-pasta"
+            :disabled="favo"
           ></v-checkbox>
           <v-checkbox
             v-model="genre"
@@ -73,6 +77,7 @@
             hide-details
             class="mx-3"
             append-icon="mdi-food-croissant"
+            :disabled="favo"
           ></v-checkbox>
           <v-checkbox
             v-model="genre"
@@ -82,6 +87,7 @@
             hide-details
             class="mx-3"
             append-icon="mdi-food-turkey"
+            :disabled="favo"
           ></v-checkbox>
           <v-checkbox
             v-model="genre"
@@ -91,8 +97,17 @@
             hide-details
             append-icon="mdi-noodles"
             class="mx-3"
+            :disabled="favo"
           ></v-checkbox>
         </div>
+        <v-checkbox
+            v-model="favo"
+            label="お気に入り"
+            color="#FBC02D"
+            hide-details
+            prepend-icon="mdi-star"
+            class="mx-3 my-10"
+          ></v-checkbox>
         <v-btn
         　@click="close"
         >
@@ -127,7 +142,8 @@ export default {
         'G013',
       ],
       genre: [],
-      all: true
+      all: true,
+      favo: false
     }
   },
   created() {
@@ -149,6 +165,13 @@ export default {
     },
     range() {
       this.$store.dispatch('restaurants/changeRange', this.range)
+    },
+    favo() {
+      if (this.favo) {
+        this.all = true
+        this.setAll()
+        this.$store.dispatch('restaurants/changeFavo', this.favo)
+      }
     }
   },
   methods: {
@@ -161,6 +184,8 @@ export default {
     },
     close() {
       this.drawer = false
+      if (this.favo) return true
+      
       let data = this.getPosition
       data.start = null
       this.$store.dispatch('restaurants/fetchAPI', data)
