@@ -23,8 +23,10 @@ export default {
 .main {
   max-width: 1000px;
   text-align: center;
-  font-family: 'Noto Sans JP', sans-serif;
   height: 100%;
+}
+.v-application{
+    font-family: 'Noto Sans JP', sans-serif !important;
 }
 
 .v-application ul, .v-application ol {
