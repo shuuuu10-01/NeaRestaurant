@@ -64,8 +64,6 @@ export default {
       this.scroll_end = false
       if (this.list.length !== this.getList.length) {
         this.list = this.getList
-      } else {
-        this.scroll_end = true
       }
     }
   }

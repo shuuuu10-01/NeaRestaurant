@@ -1,7 +1,16 @@
 import axios from "axios";
 
 export const state = () => ({
-  list: []
+  list: [],
+  genre: [
+    'G001',
+    'G004',
+    'G005',
+    'G007',
+    'G008',
+    'G013',
+  ],
+  range: 4
 });
 
 export const getters = {
@@ -20,17 +29,25 @@ export const getters = {
 };
 
 export const actions = {
-  async fetchAPI({ commit }, position) {
+  async fetchAPI({ state, commit }, position) {
     // ここにAPI通信をして検索結果を取得
-    const data = await searchByPosition(position.latitude, position.longitude, 4, position.start);
+    const data = await searchByPosition(position.latitude, position.longitude, state.range, position.start, state.genre);
+    console.log(state)
     if (!data) {
       return false
     }
     if (position.start == null) {
-      commit('setList', data)
+      await commit('setList', [])
+      await commit('setList', data)
     } else {
       commit('addList', data)
     }
+  },
+  changeGenre({ commit }, genre){
+    commit('setGenre', genre)
+  },
+  changeRange({ commit }, range) {
+    commit('setRange', range)
   }
 }
 
@@ -40,10 +57,23 @@ export const mutations = {
   },
   addList(state, data) {
     state.list = state.list.concat(data)
+  },
+  setGenre(state, genre) {
+    state.genre = genre
+  },
+  setRange(state, range) {
+    state.range = range
   }
 };
 
-async function searchByPosition(latitude, longitude, range, start) {
+async function searchByPosition(latitude, longitude, range, start, genre) {
+  let genre_prams = ""
+  if (genre.length !== 6) {
+    genre_prams += genre[0]
+    for (let i = 1; i<genre.length; i++) {
+      genre_prams += ','+genre[i]
+    }
+  }
   return new Promise((resolve, reject) => {
     axios.get(process.env.BASE_URL + "gourmet/v1/", {
       params: {
@@ -52,6 +82,7 @@ async function searchByPosition(latitude, longitude, range, start) {
         lat: latitude,
         lng: longitude,
         range: range,
+        genre: genre_prams,
         format: "json"
       }
     })

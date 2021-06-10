@@ -16,28 +16,85 @@
         width="100%"
         height="100%"
       >
-        <v-list
-          nav
-          dense
-        >
-          <v-list-item-group
-            active-class="deep-purple--text text--accent-4"
-          >
-            <v-list-item>
-              <v-list-item-title>Foo</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-title>Bar</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-title>Fizz</v-list-item-title>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
+        <icon-text icon="mdi-walk" text="お店の検索範囲（現在地から）" class="text"/>
+        <div class="slider">
+          <v-slider
+            v-model="range"
+            :tick-labels="ticksLabels"
+            min="1"
+            max="5"
+            ticks="always"
+            tick-size="4"
+            width="90%"
+          ></v-slider>
+        </div>
+        <icon-text icon="mdi-store" text="お店のジャンル" class="text"/>
+        <v-checkbox
+          v-model="all"
+          label="すべて"
+          color="blue"
+          hide-details
+          class="mx-3"
+          @click="setAll"
+        ></v-checkbox>
+        <div class="genre">
+          <v-checkbox
+            v-model="genre"
+            append-icon="mdi-glass-mug-variant"
+            label="居酒屋"
+            color="primary"
+            value="G001"
+            hide-details
+            class="mx-3"
+          ></v-checkbox>
+          <v-checkbox
+            v-model="genre"
+            label="和食"
+            color="secondary"
+            value="G004"
+            hide-details
+            class="mx-3"
+            append-icon="mdi-food-variant"
+          ></v-checkbox>
+          <v-checkbox
+            v-model="genre"
+            label="洋食"
+            color="success"
+            value="G005"
+            hide-details
+            class="mx-3"
+            append-icon="mdi-pasta"
+          ></v-checkbox>
+          <v-checkbox
+            v-model="genre"
+            label="中華"
+            color="warning"
+            value="G007"
+            hide-details
+            class="mx-3"
+            append-icon="mdi-food-croissant"
+          ></v-checkbox>
+          <v-checkbox
+            v-model="genre"
+            label="焼肉"
+            color="error"
+            value="G008"
+            hide-details
+            class="mx-3"
+            append-icon="mdi-food-turkey"
+          ></v-checkbox>
+          <v-checkbox
+            v-model="genre"
+            label="ラーメン"
+            color="yellow"
+            value="G013"
+            hide-details
+            append-icon="mdi-noodles"
+            class="mx-3"
+          ></v-checkbox>
+        </div>
         <v-btn
-        　@click="drawer= !drawer"
+        　@click="close"
         >
           閉じる
         </v-btn>
@@ -47,10 +104,66 @@
 </template>
 
 <script>
+import IconText from './IconText.vue'
 export default {
+  components: { IconText },
   data () {
     return {
-      drawer: false
+      drawer: false,
+      range: 4,
+      ticksLabels: [
+        '300m',
+        '500m',
+        '~1km',
+        '~2km',
+        '~3km'
+      ],
+      basic: [
+        'G001',
+        'G004',
+        'G005',
+        'G007',
+        'G008',
+        'G013',
+      ],
+      genre: [],
+      all: true
+    }
+  },
+  created() {
+    this.genre = this.basic
+  },
+  computed: {
+    getPosition() {
+      return this.$store.getters['geolocation/position']
+    }
+  },
+  watch: {
+    genre() {
+      if (this.genre.length == 6) {
+        this.all = true
+      } else {
+        this.all = false
+      }
+      this.$store.dispatch('restaurants/changeGenre', this.genre)
+    },
+    range() {
+      this.$store.dispatch('restaurants/changeRange', this.range)
+    }
+  },
+  methods: {
+    setAll() {
+      if (this.all) {
+        this.genre = this.basic
+      } else {
+        this.genre = []
+      }
+    },
+    close() {
+      this.drawer = false
+      let data = this.getPosition
+      data.start = null
+      this.$store.dispatch('restaurants/fetchAPI', data)
     }
   }
 }
@@ -67,5 +180,24 @@ export default {
   top: 7px;
   left: 7px;
   z-index: 10;
+}
+.slider {
+  width: 90%;
+  margin: auto;
+}
+.text {
+  margin-top: 10px;
+  text-align: left;
+  color: black;
+}
+.text p{
+  color: black;
+}
+.genre {
+  width: 95%;
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 </style>
