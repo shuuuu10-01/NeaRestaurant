@@ -1,7 +1,13 @@
 <template>
-  <hooper v-bind="options" style="height: 100%; margin: auto;">
+  <hooper
+    ref="carousel"
+    @slide="updateCarousel"
+    v-bind="options"
+    v-if="list !== []"
+    style="height: 100%; margin: auto;"
+  >
     <slide 
-      v-for="item in getList"
+      v-for="item in list"
       :key="item.num"
     >
       <restaurant-card :item="item"/>
@@ -22,7 +28,9 @@ export default {
         itemsToShow: 1,
         centerMode: true,
         progress: true
-      }
+      },
+      list: [],
+      scroll_end: false
     }
   },
   components: {
@@ -30,9 +38,35 @@ export default {
     Hooper,
     Slide
   },
+  watch: {
+    getList() {
+      this.list = this.getList
+    }
+  },
   computed: {
     getList () {
       return this.$store.getters['restaurants/list']
+    },
+    position () {
+      return this.$store.getters['geolocation/position']
+    }
+  },
+  methods: {
+    async updateCarousel(payload) {
+      if (this.scroll_end || this.getList === [] || this.getList.length - 1 !== payload.currentSlide) {
+        return false
+      }
+
+      let data = this.position
+      data.start = this.getList.length+1
+      this.scroll_end = true
+      await this.$store.dispatch('restaurants/fetchAPI', data)
+      this.scroll_end = false
+      if (this.list.length !== this.getList.length) {
+        this.list = this.getList
+      } else {
+        this.scroll_end = true
+      }
     }
   }
 }
