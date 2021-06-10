@@ -143,7 +143,10 @@ export default {
       ],
       genre: [],
       all: true,
-      favo: false
+      favo: false,
+      b_range: 0,
+      b_genre: [],
+      b_all: false
     }
   },
   created() {
@@ -172,6 +175,11 @@ export default {
         this.setAll()
         this.$store.dispatch('restaurants/changeFavo', this.favo)
       }
+    },
+    drawer() {
+      this.b_range = this.range
+      this.b_all = this.all
+      this.b_genre = this.genre
     }
   },
   methods: {
@@ -184,11 +192,14 @@ export default {
     },
     close() {
       this.drawer = false
-      if (this.favo) return true
+      if (this.favo || this.checkUpdate()) return true
       
       let data = this.getPosition
       data.start = null
       this.$store.dispatch('restaurants/fetchAPI', data)
+    },
+    checkUpdate() {
+      return this.b_range === this.range && this.b_all === this.all && this.b_genre === this.genre
     }
   }
 }

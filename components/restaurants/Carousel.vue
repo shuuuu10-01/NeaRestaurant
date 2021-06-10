@@ -40,6 +40,9 @@ export default {
   },
   watch: {
     getList() {
+      if (!this.scroll_end) {
+        this.$refs.carousel.slideTo(0);
+      }
       this.list = this.getList
     }
   },
