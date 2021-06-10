@@ -1,11 +1,17 @@
 <template>
-  <div>
-    NeaRestaurant
+  <div class="index">
+    <search-conditions />
+    <!-- <list-view /> -->
+    <carousel v-if="restaurants !== []" />
   </div>
 </template>
 
 <script>
+import Carousel from '../components/restaurants/Carousel.vue'
+import ListView from '../components/restaurants/ListView.vue'
+import SearchConditions from '../components/restaurants/SearchConditions.vue'
 export default {
+  components: { ListView, Carousel, SearchConditions },
   computed: {
     restaurants () {
       return this.$store.getters['restaurants/list']
@@ -15,19 +21,16 @@ export default {
     }
   },
   async mounted () {
+    await this.$store.dispatch('geolocation/fetchPosition')
+    await this.$store.dispatch('restaurants/fetchAPI', this.position)
     console.info(this.restaurants)
-    await this.fetchAPI()
-    await this.fetchPosition()
-    console.info(this.restaurants)
-  },
-  methods: {
-    fetchAPI () {
-      const data = [3, 4, 5]
-      return this.$store.dispatch('restaurants/fetchAPI', data)
-    },
-    fetchPosition () {
-      return this.$store.dispatch('geolocation/fetchPosition')
-    }
   }
 }
 </script>
+
+<style scoped>
+.index {
+  width: 100%;
+  margin: auto;
+}
+</style>
