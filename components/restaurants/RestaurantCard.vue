@@ -4,7 +4,7 @@
     hover
     rounded
   >
-    <v-img height="430px" :src="item.photo.pc.l" />
+    <v-img :height="height" :src="item.photo.pc.l" />
     <div class="under">
       <h2 class="text">{{ item.name }}</h2>
       <p v-if="item.catch" class="text">{{ item.catch }}</p>
@@ -44,7 +44,8 @@ export default {
   components: { IconText },
   data () {
     return {
-      nowFavo: false
+      nowFavo: false,
+      height: String(window.innerHeight * 0.5)+'px'
     }
   },
   props: {
@@ -53,12 +54,20 @@ export default {
   async created () {
     this.nowFavo = this.favo()
   },
+  mounted() {
+    window.addEventListener('resize', this.handleResize)
+  },
   computed: {
     getPosition() {
       return this.$store.getters['geolocation/position']
-    }
+    },
+
   },
   methods: {
+    handleResize() {
+      // resizeのたびにこいつが発火するので、ここでやりたいことをやる
+      this.height = String(window.innerHeight * 0.5)+'px';
+    },
     favo () {
       const list = this.getLocalStrage() 
       if (list.length === 0) { return false }
