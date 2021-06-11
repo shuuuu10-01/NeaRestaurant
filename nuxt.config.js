@@ -79,5 +79,6 @@ export default {
         '^/api': ''
       }
     }
-  }
+  },
+  ssr: false
 }
