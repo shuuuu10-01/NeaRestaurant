@@ -10,12 +10,7 @@
     </v-btn>
     <v-card v-show="!loading" width="95%" class="my-5 mx-auto card">
       <v-img height="450px" :src="data.photo.pc.l" />
-      <div class="content">
-        <h2>{{ data.name }}</h2>
-        <icon-text icon="mdi-map-marker" :text="data.address + get_distance()"/>
-        <icon-text icon="mdi-walk" :text="data.mobile_access"/>
-        <icon-text icon="mdi-calendar-range" :text="data.open"/>
-        <icon-text icon="mdi-web" :text="data.urls.pc" url="true"/>
+      <div class="favo">
         <v-btn
           icon
           class="icon"
@@ -33,6 +28,13 @@
         >
          <v-icon large>mdi-star</v-icon>
         </v-btn>
+      </div>
+      <div class="content">
+        <h2>{{ data.name }}</h2>
+        <icon-text icon="mdi-map-marker" :text="data.address + get_distance()"/>
+        <icon-text icon="mdi-walk" :text="data.mobile_access"/>
+        <icon-text icon="mdi-calendar-range" :text="data.open"/>
+        <icon-text icon="mdi-web" :text="data.urls.pc" url="true"/>
       </div>
     </v-card>
   </div>
@@ -174,5 +176,9 @@ h2 {
   top: 10px;
   right: 7px;
   z-index: 10;
+}
+.favo {
+  position: relative;
+  width: 100%;
 }
 </style>
