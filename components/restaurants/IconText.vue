@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
 p, a {
-  font-size: 1.2vw;
+  font-size: min(16px, 2.2vw);
   color: gray;
   padding-left: 16px;
   padding-bottom: 8px;
