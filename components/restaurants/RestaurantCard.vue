@@ -61,7 +61,11 @@ export default {
     getPosition() {
       return this.$store.getters['geolocation/position']
     },
-
+  },
+  watch: {
+    item() {
+      this.nowFavo = this.favo()
+    }
   },
   methods: {
     handleResize() {

@@ -173,8 +173,8 @@ export default {
       if (this.favo) {
         this.all = true
         this.setAll()
-        this.$store.dispatch('restaurants/changeFavo', this.favo)
       }
+      this.$store.dispatch('restaurants/changeFavo', this.favo)
     },
     drawer() {
       this.b_range = this.range

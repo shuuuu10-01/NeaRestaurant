@@ -74,6 +74,7 @@ export const mutations = {
   setFavo(state, favo) {
     state.favo = favo
     if (favo) {
+      state.list = []
       state.list = JSON.parse(localStorage.getItem('favolist'))
       console.log(state.list)
     }
