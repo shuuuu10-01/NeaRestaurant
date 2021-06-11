@@ -8,7 +8,7 @@
         mdi-arrow-left
       </v-icon>
     </v-btn>
-    <v-card v-if="!loading" width="95%" class="my-5 mx-auto card">
+    <v-card v-show="!loading" width="95%" class="my-5 mx-auto card">
       <v-img height="450px" :src="data.photo.pc.l" />
       <div class="content">
         <h2>{{ data.name }}</h2>
@@ -19,7 +19,7 @@
         <v-btn
           icon
           class="icon"
-          v-if="!nowFavo"
+          v-show="!nowFavo"
           @click="setStorage(true)"
         >
           <v-icon large>mdi-star</v-icon>
@@ -27,7 +27,7 @@
         <v-btn 
           icon
           class="icon"
-          v-if="nowFavo"
+          v-show="nowFavo"
           color="#FBC02D"
           @click="setStorage(false)"
         >

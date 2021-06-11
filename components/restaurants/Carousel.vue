@@ -3,7 +3,7 @@
     ref="carousel"
     @slide="updateCarousel"
     v-bind="options"
-    v-if="list !== []"
+    v-show="list !== []"
     style="height: 100%; margin: auto;"
   >
     <slide 

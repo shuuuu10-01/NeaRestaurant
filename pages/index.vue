@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <search-conditions />
-    <carousel v-if="restaurants !== []" />
+    <carousel v-show="restaurants !== []" />
   </div>
 </template>
 

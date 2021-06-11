@@ -1,6 +1,6 @@
 <template>
   <v-container 
-    v-if="getList"
+    v-show="getList"
     width="90%"
   >
     <v-row 

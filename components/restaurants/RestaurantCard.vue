@@ -7,7 +7,7 @@
     <v-img :height="height" :src="item.photo.pc.l" />
     <div class="under">
       <h2 class="text">{{ item.name }}</h2>
-      <p v-if="item.catch" class="text">{{ item.catch }}</p>
+      <p v-show="item.catch" class="text">{{ item.catch }}</p>
       <icon-text icon="mdi-walk" :text="item.mobile_access" />
       <icon-text icon="mdi-map-marker" :text="get_distance()" />
       <v-btn
@@ -20,7 +20,7 @@
       <v-btn
         icon
         class="icon"
-        v-if="!nowFavo"
+        v-show="!nowFavo"
         @click="setStorage(true)"
       >
         <v-icon large>mdi-star</v-icon>
@@ -28,7 +28,7 @@
       <v-btn 
         icon
         class="icon"
-        v-if="nowFavo"
+        v-show="nowFavo"
         color="#FBC02D"
         @click="setStorage(false)"
       >

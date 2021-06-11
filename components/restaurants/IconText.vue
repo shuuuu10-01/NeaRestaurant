@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p v-if="text && !url"><v-icon>{{ icon }}</v-icon> {{ text }}</p>
-    <a v-if="text && url" :href="text"><v-icon>{{ icon }}</v-icon> 店舗サイトへ</a>
+    <p v-show="text && !url"><v-icon>{{ icon }}</v-icon> {{ text }}</p>
+    <a v-show="text && url" :href="text"><v-icon>{{ icon }}</v-icon> 店舗サイトへ</a>
   </div>
 </template>
 
