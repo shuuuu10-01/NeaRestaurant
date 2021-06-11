@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/api/*"
-  to = "http://webservice.recruit.co.jp/hotpepper/api/gourmet/v1/"
+  to = "http://webservice.recruit.co.jp/hotpepper/:splat"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
