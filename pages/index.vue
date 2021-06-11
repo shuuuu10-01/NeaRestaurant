@@ -1,17 +1,15 @@
 <template>
   <div class="index">
     <search-conditions />
-    <!-- <list-view /> -->
     <carousel v-if="restaurants !== []" />
   </div>
 </template>
 
 <script>
 import Carousel from '../components/restaurants/Carousel.vue'
-import ListView from '../components/restaurants/ListView.vue'
 import SearchConditions from '../components/restaurants/SearchConditions.vue'
 export default {
-  components: { ListView, Carousel, SearchConditions },
+  components: { Carousel, SearchConditions },
   computed: {
     restaurants () {
       return this.$store.getters['restaurants/list']
