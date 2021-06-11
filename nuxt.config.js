@@ -80,5 +80,8 @@ export default {
       }
     }
   },
-  ssr: false
+  ssr: false,
+  generate: {
+    fallback: true
+  }
 }
