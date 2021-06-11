@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/api/*"
+  to = "http://webservice.recruit.co.jp/hotpepper"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
