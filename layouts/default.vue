@@ -21,7 +21,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP');
 
 .main {
-  max-width: 1000px;
   text-align: center;
   height: 100%;
 }

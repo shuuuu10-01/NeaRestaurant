@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="details">
     <v-btn icon class="top-icon">
       <v-icon
         large
@@ -179,6 +179,10 @@ h2 {
 }
 .favo {
   position: relative;
+  width: 100%;
+}
+.details {
+  margin: auto;
   width: 100%;
 }
 </style>
