@@ -1,7 +1,7 @@
 export const state = () => ({
   position: {
-    latitude: 0,
-    longitude: 0
+    latitude: 35.677408,
+    longitude: 139.766339
   }
 })
 
@@ -39,7 +39,7 @@ export const actions = {
           resolve()
         }, 
         error => {
-          errorCallback(error);
+          // errorCallback(error);
           reject()
         }, 
         {
@@ -48,6 +48,7 @@ export const actions = {
           maximumAge: 600000
         }
       )
+      reject()
     })
   }
 };
@@ -55,4 +56,5 @@ export const actions = {
 function errorCallback(position) {
   alert("位置情報が取得できませんでした。\n"+ String(position.message))
   console.info(position)
+  return false
 }
