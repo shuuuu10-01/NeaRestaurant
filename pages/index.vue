@@ -19,8 +19,13 @@ export default {
     }
   },
   async mounted () {
-    await this.$store.dispatch('geolocation/fetchPosition')
-    await this.$store.dispatch('restaurants/fetchAPI', this.position)
+    this.$store.dispatch('geolocation/fetchPosition')
+    .then(() => {
+      this.$store.dispatch('restaurants/fetchAPI', this.position)
+    })
+    .catch(() => {
+      this.$store.dispatch('restaurants/fetchAPI', this.position)
+    })
     console.info(this.restaurants)
   }
 }

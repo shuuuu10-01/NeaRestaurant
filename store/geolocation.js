@@ -53,6 +53,6 @@ export const actions = {
 };
 
 function errorCallback(position) {
-  alert("位置情報が取得できませんでした。\n"+ String(position.message))
+  alert("位置情報が取得できませんでした。\n"+ String(position.message) + "\n仮の位置情報でレストランを検索します。")
   console.info(position)
 }
