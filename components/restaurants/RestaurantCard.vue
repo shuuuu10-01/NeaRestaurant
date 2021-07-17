@@ -143,6 +143,9 @@ p {
   font-size: 14px;
   color: gray;
   padding-left: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .under {
   position: relative;
