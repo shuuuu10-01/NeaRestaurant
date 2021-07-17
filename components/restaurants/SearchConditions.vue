@@ -210,7 +210,7 @@ export default {
 .menu {
   position: absolute;
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100% - 85x);
 }
 .icon {
   position: absolute;

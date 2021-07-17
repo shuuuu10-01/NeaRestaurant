@@ -12,6 +12,8 @@ export default {
 
 <style scoped>
 header {
+  position: fixed;
+  top: 0;
   text-align: center;
   height: 50px;
   line-height: 50px;
