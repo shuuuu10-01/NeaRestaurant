@@ -4,7 +4,7 @@
     @slide="updateCarousel"
     v-bind="options"
     v-show="list !== []"
-    class="hopper"
+    style="height: 100%; margin: auto;"
   >
     <slide 
       v-for="item in list"
@@ -76,9 +76,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.hopper {
-  height: calc(100% - 85px);
-  margin: auto;
-}
-</style>
